@@ -1,0 +1,118 @@
+@model TechMovePOE.Models.Contract
+
+@{
+    ViewData["Title"] = "Create Contract";
+}
+
+<h1>Create Contract</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+
+        <form asp-action="Create" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- CLIENT DROPDOWN -->
+            <div class="form-group mb-3">
+                <label asp-for="ClientId" class="control-label"></label>
+
+                <select asp-for="ClientId"
+                        class="form-control"
+                        asp-items="ViewBag.ClientId">
+                    <option value="">-- Select Client --</option>
+                </select>
+            </div>
+
+            <!-- START DATE -->
+            <div class="form-group mb-3">
+                <label asp-for="StartDate" class="control-label"></label>
+
+                <input asp-for="StartDate"
+                       class="form-control"
+                       type="datetime-local" />
+
+                <span asp-validation-for="StartDate"
+                      class="text-danger"></span>
+            </div>
+
+            <!-- END DATE -->
+            <div class="form-group mb-3">
+                <label asp-for="EndDate" class="control-label"></label>
+
+                <input asp-for="EndDate"
+                       class="form-control"
+                       type="datetime-local" />
+
+                <span asp-validation-for="EndDate"
+                      class="text-danger"></span>
+            </div>
+
+            <!-- STATUS -->
+            <div class="form-group mb-3">
+                <label asp-for="Status" class="control-label"></label>
+
+                <select asp-for="Status" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    <option>Active</option>
+                    <option>Expired</option>
+                    <option>On Hold</option>
+                </select>
+
+                <span asp-validation-for="Status"
+                      class="text-danger"></span>
+            </div>
+
+            <!-- SERVICE LEVEL -->
+            <div class="form-group mb-3">
+                <label asp-for="ServiceLevel" class="control-label"></label>
+
+                <select asp-for="ServiceLevel" class="form-control">
+                    <option value="">-- Select Service Level --</option>
+                    <option>Basic</option>
+                    <option>Premium</option>
+                    <option>Enterprise</option>
+                </select>
+
+                <span asp-validation-for="ServiceLevel"
+                      class="text-danger"></span>
+            </div>
+
+            <!-- PDF FILE -->
+            <div class="form-group mb-4">
+                <label asp-for="AgreementFile" class="control-label">
+                    Upload Signed Agreement (PDF Only)
+                </label>
+
+                <input asp-for="AgreementFile"
+                       type="file"
+                       class="form-control"
+                       accept=".pdf" />
+
+                <span asp-validation-for="AgreementFile"
+                      class="text-danger"></span>
+            </div>
+
+            <!-- BUTTON -->
+            <div class="form-group">
+                <input type="submit"
+                       value="Create Contract"
+                       class="btn btn-primary" />
+            </div>
+
+        </form>
+
+        <br />
+
+        <a asp-action="Index">Back to Contracts</a>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

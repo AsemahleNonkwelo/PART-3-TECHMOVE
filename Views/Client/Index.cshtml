@@ -1,0 +1,34 @@
+@model IEnumerable<TechMovePOE.Models.Client>
+
+<h1>Clients</h1>
+
+<p>
+    <a asp-action="Create">Add New Client</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contact Details</th>
+            <th>Region</th>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+    <td>@item.Name</td>
+    <td>@item.ContactDetails</td>
+    <td>@item.Region</td>
+
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">
+            Edit
+        </a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>

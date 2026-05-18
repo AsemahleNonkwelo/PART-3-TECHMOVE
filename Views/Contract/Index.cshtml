@@ -1,0 +1,87 @@
+@model IEnumerable<TechMovePOE.Models.Contract>
+
+@{
+    ViewData["Title"] = "Contracts";
+}
+
+<h1>Contracts</h1>
+
+<form method="get" class="mb-3">
+    <input type="text"
+           name="status"
+           class="form-control"
+           placeholder="Search by Status (Active, Expired, On Hold)" />
+
+    <button type="submit"
+            class="btn btn-primary mt-2">
+        Search
+    </button>
+</form>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        Create New Contract
+    </a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Service Level</th>
+            <th>Agreement</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.Client.Name</td>
+
+            <td>@item.StartDate</td>
+
+            <td>@item.EndDate</td>
+
+            <td>@item.Status</td>
+
+            <td>@item.ServiceLevel</td>
+
+            <td>
+                @if (!string.IsNullOrEmpty(item.AgreementFilePath))
+                {
+                    <a href="@item.AgreementFilePath"
+                       target="_blank">
+                        Download PDF
+                    </a>
+                }
+                else
+                {
+                    <span>No File</span>
+                }
+            </td>
+
+            <td>
+                <a asp-action="Edit"
+                   asp-route-id="@item.ContractId">
+                    Edit
+                </a> |
+
+                <a asp-action="Details"
+                   asp-route-id="@item.ContractId">
+                    Details
+                </a> |
+
+                <a asp-action="Delete"
+                   asp-route-id="@item.ContractId">
+                    Delete
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table> 

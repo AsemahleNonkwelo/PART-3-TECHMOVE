@@ -1,0 +1,28 @@
+@model TechMovePOE.Models.Client
+
+<h1>Edit Client</h1>
+
+<form asp-action="Edit">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Contact Details</label>
+        <input asp-for="ContactDetails" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Region</label>
+        <input asp-for="Region" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Update Client
+    </button>
+
+</form>
