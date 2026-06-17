@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using TechMovePOE.Data;
-using TechMovePOE.Models;
+using TechMovePOE.API.Data;
+using TechMovePOE.API.Models;
 
 namespace TechMovePOE.Controllers
 {

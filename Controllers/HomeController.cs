@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TechMovePOE.Models;
+using TechMovePOE.API.Models;
 
 namespace TechMovePOE.Controllers;
 

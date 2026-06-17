@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using TechMovePOE.Data;
-using TechMovePOE.Models;
+using TechMovePOE.API.Data;
+using TechMovePOE.API.Models;
 
 namespace TechMovePOE.Controllers
 {
@@ -17,7 +17,9 @@ namespace TechMovePOE.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _environment;
 
-        public ContractController(AppDbContext context, IWebHostEnvironment environment)
+        public ContractController(
+            AppDbContext context,
+            IWebHostEnvironment environment)
         {
             _context = context;
             _environment = environment;
@@ -61,7 +63,11 @@ namespace TechMovePOE.Controllers
         // GET: Contract/Create
         public IActionResult Create()
         {
-            ViewBag.ClientId = new SelectList(_context.Clients, "Id", "Name");
+            ViewBag.ClientId = new SelectList(
+                _context.Clients,
+                "ClientId",
+                "Name");
+
             return View();
         }
 
@@ -72,43 +78,52 @@ namespace TechMovePOE.Controllers
             [Bind("ContractId,ClientId,StartDate,EndDate,Status,ServiceLevel")]
             Contract contract)
         {
-            // PDF Upload
             if (contract.AgreementFile != null)
             {
-                var extension = Path.GetExtension(contract.AgreementFile.FileName);
+                var extension =
+                    Path.GetExtension(contract.AgreementFile.FileName);
 
-                // Validate PDF
                 if (extension.ToLower() != ".pdf")
                 {
-                    ModelState.AddModelError("", "Only PDF files are allowed.");
+                    ModelState.AddModelError(
+                        "",
+                        "Only PDF files are allowed.");
 
-                    ViewBag.ClientId = new SelectList(_context.Clients, "Id", "Name", contract.ClientId);
+                    ViewBag.ClientId = new SelectList(
+                        _context.Clients,
+                        "ClientId",
+                        "Name",
+                        contract.ClientId);
 
                     return View(contract);
                 }
 
-                // Upload folder
-                string uploadsFolder = Path.Combine(_environment.WebRootPath, "contracts");
+                string uploadsFolder =
+                    Path.Combine(
+                        _environment.WebRootPath,
+                        "contracts");
 
-                // Create folder if missing
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                // Unique filename
-                string uniqueFileName = Guid.NewGuid().ToString() + ".pdf";
+                string uniqueFileName =
+                    Guid.NewGuid().ToString() + ".pdf";
 
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                string filePath =
+                    Path.Combine(
+                        uploadsFolder,
+                        uniqueFileName);
 
-                // Save file
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                using (var stream =
+                    new FileStream(filePath, FileMode.Create))
                 {
                     await contract.AgreementFile.CopyToAsync(stream);
                 }
 
-                // Save path to DB
-                contract.AgreementFilePath = "/contracts/" + uniqueFileName;
+                contract.AgreementFilePath =
+                    "/contracts/" + uniqueFileName;
             }
 
             if (ModelState.IsValid)
@@ -119,7 +134,11 @@ namespace TechMovePOE.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.ClientId = new SelectList(_context.Clients, "Id", "Name", contract.ClientId);
+            ViewBag.ClientId = new SelectList(
+                _context.Clients,
+                "ClientId",
+                "Name",
+                contract.ClientId);
 
             return View(contract);
         }
@@ -132,14 +151,19 @@ namespace TechMovePOE.Controllers
                 return NotFound();
             }
 
-            var contract = await _context.Contracts.FindAsync(id);
+            var contract =
+                await _context.Contracts.FindAsync(id);
 
             if (contract == null)
             {
                 return NotFound();
             }
 
-            ViewBag.ClientId = new SelectList(_context.Clients, "Id", "Name", contract.ClientId);
+            ViewBag.ClientId = new SelectList(
+                _context.Clients,
+                "ClientId",
+                "Name",
+                contract.ClientId);
 
             return View(contract);
         }
@@ -170,16 +194,18 @@ namespace TechMovePOE.Controllers
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
 
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.ClientId = new SelectList(_context.Clients, "Id", "Name", contract.ClientId);
+            ViewBag.ClientId = new SelectList(
+                _context.Clients,
+                "ClientId",
+                "Name",
+                contract.ClientId);
 
             return View(contract);
         }
@@ -209,7 +235,8 @@ namespace TechMovePOE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var contract = await _context.Contracts.FindAsync(id);
+            var contract =
+                await _context.Contracts.FindAsync(id);
 
             if (contract != null)
             {
@@ -223,7 +250,8 @@ namespace TechMovePOE.Controllers
 
         private bool ContractExists(int id)
         {
-            return _context.Contracts.Any(e => e.ContractId == id);
+            return _context.Contracts.Any(
+                e => e.ContractId == id);
         }
     }
 }

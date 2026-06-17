@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TechMovePOE.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cab07e6b75e9ffa4534caf33a45a81759ffb09e1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7891cc469a1bcbbbfb707cf33a7d6082953d485")]
 [assembly: System.Reflection.AssemblyProductAttribute("TechMovePOE.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TechMovePOE.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

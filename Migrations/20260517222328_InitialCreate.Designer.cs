@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TechMovePOE.Data;
+using TechMovePOE.API.Data;
 
 #nullable disable
 
@@ -20,7 +20,7 @@ namespace TechMovePOE.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.8");
 
-            modelBuilder.Entity("TechMovePOE.Models.Client", b =>
+            modelBuilder.Entity("TechMovePOE.API.Models.Client", b =>
                 {
                     b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace TechMovePOE.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("TechMovePOE.Models.Contract", b =>
+            modelBuilder.Entity("TechMovePOE.API.Models.Contract", b =>
                 {
                     b.Property<int>("ContractId")
                         .ValueGeneratedOnAdd()
@@ -76,7 +76,7 @@ namespace TechMovePOE.Migrations
                     b.ToTable("Contracts");
                 });
 
-            modelBuilder.Entity("TechMovePOE.Models.ServiceRequest", b =>
+            modelBuilder.Entity("TechMovePOE.API.Models.ServiceRequest", b =>
                 {
                     b.Property<int>("ServiceRequestId")
                         .ValueGeneratedOnAdd()
@@ -106,9 +106,9 @@ namespace TechMovePOE.Migrations
                     b.ToTable("ServiceRequests");
                 });
 
-            modelBuilder.Entity("TechMovePOE.Models.Contract", b =>
+            modelBuilder.Entity("TechMovePOE.API.Models.Contract", b =>
                 {
-                    b.HasOne("TechMovePOE.Models.Client", "Client")
+                    b.HasOne("TechMovePOE.API.Models.Client", "Client")
                         .WithMany("Contracts")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -117,9 +117,9 @@ namespace TechMovePOE.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("TechMovePOE.Models.ServiceRequest", b =>
+            modelBuilder.Entity("TechMovePOE.API.Models.ServiceRequest", b =>
                 {
-                    b.HasOne("TechMovePOE.Models.Contract", "Contract")
+                    b.HasOne("TechMovePOE.API.Models.Contract", "Contract")
                         .WithMany("ServiceRequests")
                         .HasForeignKey("ContractId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -128,12 +128,12 @@ namespace TechMovePOE.Migrations
                     b.Navigation("Contract");
                 });
 
-            modelBuilder.Entity("TechMovePOE.Models.Client", b =>
+            modelBuilder.Entity("TechMovePOE.API.Models.Client", b =>
                 {
                     b.Navigation("Contracts");
                 });
 
-            modelBuilder.Entity("TechMovePOE.Models.Contract", b =>
+            modelBuilder.Entity("TechMovePOE.API.Models.Contract", b =>
                 {
                     b.Navigation("ServiceRequests");
                 });

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TechMovePOE.Data;
-using TechMovePOE.Models;
+using TechMovePOE.API.Data;
+using TechMovePOE.API.Models;
 
 namespace TechMovePOE.Controllers
 {
